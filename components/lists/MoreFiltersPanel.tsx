@@ -38,11 +38,17 @@ export default function MoreFiltersPanel({ onClose }: Props) {
 
   const AGE_OPTIONS: Age[] = ['0-17', '18-24', '25-34', '35-54']
 
+  const GENDER_LABELS: Record<Gender, string> = {
+    all: '전체',
+    female: '여성',
+    male: '남성',
+  }
+
   return (
     <div ref={panelRef} className="mf-panel">
       {/* Header */}
       <div className="mf-header">
-        <span className="mf-header__title">Filter by creator</span>
+        <span className="mf-header__title">크리에이터 필터</span>
       </div>
 
       <div className="mf-body">
@@ -50,7 +56,7 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-row">
           <div className="mf-row__label">
             <span className="mf-icon">🏷</span>
-            <span>Include brand accounts</span>
+            <span>브랜드 계정 포함</span>
           </div>
           <button
             className={`mf-toggle ${includeBrand ? 'mf-toggle--on' : ''}`}
@@ -64,7 +70,7 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-row">
           <div className="mf-row__label">
             <span className="mf-icon mf-icon--purple">✦</span>
-            <span>Show only affiliate creators</span>
+            <span>제휴 크리에이터만 표시</span>
             <span className="mf-ai-badge">✨</span>
           </div>
           <button
@@ -81,7 +87,7 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-row mf-row--col">
           <div className="mf-row__label">
             <span className="mf-icon mf-icon--purple">🌐</span>
-            <span>Creator country</span>
+            <span>크리에이터 국가</span>
             <span className="mf-ai-badge">✨</span>
           </div>
           <div className="mf-select-wrap">
@@ -90,15 +96,15 @@ export default function MoreFiltersPanel({ onClose }: Props) {
               value={country}
               onChange={(e) => setCountry(e.target.value)}
             >
-              <option value="">Select country</option>
-              <option value="us">United States</option>
-              <option value="kr">Korea, Republic Of</option>
-              <option value="jp">Japan</option>
-              <option value="gb">United Kingdom</option>
-              <option value="br">Brazil</option>
-              <option value="fr">France</option>
-              <option value="de">Germany</option>
-              <option value="in">India</option>
+              <option value="">국가 선택</option>
+              <option value="us">미국</option>
+              <option value="kr">대한민국</option>
+              <option value="jp">일본</option>
+              <option value="gb">영국</option>
+              <option value="br">브라질</option>
+              <option value="fr">프랑스</option>
+              <option value="de">독일</option>
+              <option value="in">인도</option>
             </select>
             <ChevronDown size={13} className="mf-select-chevron" />
           </div>
@@ -108,13 +114,13 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-row mf-row--col">
           <div className="mf-row__label">
             <span className="mf-icon">📍</span>
-            <span>Creator geolocation</span>
+            <span>크리에이터 위치</span>
             <span className="mf-ai-badge">✨</span>
           </div>
           <div className="mf-geo-row">
             <input
               className="mf-geo-input"
-              placeholder="i.e New York"
+              placeholder="예: 서울"
               value={geolocation}
               onChange={(e) => setGeolocation(e.target.value)}
             />
@@ -131,9 +137,9 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-row mf-row--col">
           <div className="mf-row__label">
             <span className="mf-icon mf-icon--purple">🗣</span>
-            <span>Creator language</span>
+            <span>크리에이터 언어</span>
             <span className="mf-ai-badge">✨</span>
-            <button className="mf-select-all">Select all</button>
+            <button className="mf-select-all">전체 선택</button>
           </div>
           <div className="mf-select-wrap">
             <select
@@ -141,15 +147,15 @@ export default function MoreFiltersPanel({ onClose }: Props) {
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
             >
-              <option value="">Select language</option>
-              <option value="en">English</option>
-              <option value="ko">Korean</option>
-              <option value="ja">Japanese</option>
-              <option value="es">Spanish</option>
-              <option value="fr">French</option>
-              <option value="de">German</option>
-              <option value="pt">Portuguese</option>
-              <option value="zh">Chinese</option>
+              <option value="">언어 선택</option>
+              <option value="en">영어</option>
+              <option value="ko">한국어</option>
+              <option value="ja">일본어</option>
+              <option value="es">스페인어</option>
+              <option value="fr">프랑스어</option>
+              <option value="de">독일어</option>
+              <option value="pt">포르투갈어</option>
+              <option value="zh">중국어</option>
             </select>
             <ChevronDown size={13} className="mf-select-chevron" />
           </div>
@@ -161,7 +167,7 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-row">
           <div className="mf-row__label">
             <span className="mf-icon mf-icon--purple">⚧</span>
-            <span>Creator gender</span>
+            <span>크리에이터 성별</span>
           </div>
           <div className="mf-btn-group">
             {(['all', 'female', 'male'] as Gender[]).map((g) => (
@@ -172,7 +178,7 @@ export default function MoreFiltersPanel({ onClose }: Props) {
               >
                 {g === 'female' && <span>♀</span>}
                 {g === 'male' && <span>♂</span>}
-                <span style={{ textTransform: 'capitalize' }}>{g}</span>
+                <span>{GENDER_LABELS[g]}</span>
               </button>
             ))}
           </div>
@@ -182,7 +188,7 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-row">
           <div className="mf-row__label">
             <span className="mf-icon mf-icon--purple">🎂</span>
-            <span>Creator age</span>
+            <span>크리에이터 나이</span>
             <span className="mf-ai-badge">✨</span>
           </div>
           <div className="mf-btn-group">
@@ -204,12 +210,12 @@ export default function MoreFiltersPanel({ onClose }: Props) {
         <div className="mf-upsell__left">
           <Sparkles size={14} className="mf-upsell__icon" />
           <div>
-            <p className="mf-upsell__title">Elevate your influencer matches 🤩</p>
-            <p className="mf-upsell__sub">Expand your search abilities with Search and Contact</p>
+            <p className="mf-upsell__title">인플루언서 매칭을 강화하세요 🤩</p>
+            <p className="mf-upsell__sub">Search and Contact로 검색 기능을 확장하세요</p>
           </div>
         </div>
         <button className="mf-upsell__btn">
-          <Sparkles size={11} /> 7-day trial for $1
+          <Sparkles size={11} /> $1로 7일 체험하기
         </button>
       </div>
     </div>
