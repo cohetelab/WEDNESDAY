@@ -3,10 +3,10 @@ import { Search, Unlock } from 'lucide-react'
 import Link from 'next/link'
 
 const FEATURES = [
-  { label: '1:1 Contact', starter: true, outreach: true },
-  { label: 'Mass emails campaigns', starter: false, outreach: true },
-  { label: 'Custom data fields', starter: false, outreach: true },
-  { label: 'Gmail / Outlook integration', starter: false, outreach: true, icon: true },
+  { label: '1:1 연락', starter: true, outreach: true },
+  { label: '대량 이메일 캠페인', starter: false, outreach: true },
+  { label: '커스텀 데이터 필드', starter: false, outreach: true },
+  { label: 'Gmail / Outlook 연동', starter: false, outreach: true, icon: true },
 ]
 
 export default function InboxEmpty() {
@@ -27,21 +27,21 @@ export default function InboxEmpty() {
         </div>
 
         {/* Heading */}
-        <h1 className="inbox-empty__title">Ready to start the conversation?</h1>
+        <h1 className="inbox-empty__title">대화를 시작할 준비가 되셨나요?</h1>
         <p className="inbox-empty__subtitle">
-          Reach out to creators individually and view all your threads in one convenient place 🙂.
+          크리에이터에게 개별적으로 연락하고 모든 대화를 한곳에서 확인하세요 🙂.
         </p>
 
         {/* CTA */}
         <Link href="/lists" className="w-btn w-btn--primary inbox-empty__cta">
           <Search size={14} />
-          <span style={{ marginLeft: '8px' }}>Find creators now</span>
+          <span style={{ marginLeft: '8px' }}>지금 크리에이터 찾기</span>
         </Link>
 
         {/* Divider */}
         <div className="inbox-empty__divider">
           <div className="inbox-empty__divider-line" />
-          <span className="inbox-empty__divider-text">Want to move faster?</span>
+          <span className="inbox-empty__divider-text">더 빠르게 진행하고 싶으신가요?</span>
         </div>
 
         {/* Pricing comparison */}
@@ -50,18 +50,18 @@ export default function InboxEmpty() {
             {/* Header */}
             <div className="inbox-pricing__row inbox-pricing__row--header">
               <div className="inbox-pricing__feature-col">
-                <span className="inbox-pricing__category">Outreach management</span>
+                <span className="inbox-pricing__category">아웃리치 관리</span>
               </div>
               <div className="inbox-pricing__plan-col">
                 <div className="inbox-pricing__plan-header">
                   <span className="inbox-pricing__plan-icon inbox-pricing__plan-icon--starter">📬</span>
-                  <span className="inbox-pricing__plan-name">Starter</span>
+                  <span className="inbox-pricing__plan-name">스타터</span>
                 </div>
               </div>
               <div className="inbox-pricing__plan-col inbox-pricing__plan-col--highlight">
                 <div className="inbox-pricing__plan-header">
                   <span className="inbox-pricing__plan-icon inbox-pricing__plan-icon--outreach">🚀</span>
-                  <span className="inbox-pricing__plan-name">Outreach</span>
+                  <span className="inbox-pricing__plan-name">아웃리치</span>
                 </div>
               </div>
             </div>
@@ -94,12 +94,12 @@ export default function InboxEmpty() {
             <div className="inbox-pricing__row inbox-pricing__row--footer">
               <div className="inbox-pricing__feature-col" />
               <div className="inbox-pricing__plan-col">
-                <span className="inbox-pricing__current-plan">Current plan</span>
+                <span className="inbox-pricing__current-plan">현재 플랜</span>
               </div>
               <div className="inbox-pricing__plan-col inbox-pricing__plan-col--highlight">
                 <button className="inbox-pricing__unlock-btn">
                   <Unlock size={12} />
-                  <span>Unlock all features</span>
+                  <span>모든 기능 잠금 해제</span>
                 </button>
               </div>
             </div>
