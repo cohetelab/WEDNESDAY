@@ -14,7 +14,7 @@ interface Props {
 }
 
 const INITIAL_LISTS: ListItem[] = [
-  { id: 1, name: 'My first list', count: 2 },
+  { id: 1, name: '내 첫 번째 리스트', count: 2 },
 ]
 
 export default function ListsPanel({ onClose, onSelect }: Props) {
@@ -60,11 +60,11 @@ export default function ListsPanel({ onClose, onSelect }: Props) {
           <button
             className={`lp-tab ${tab === 'lists' ? 'lp-tab--active' : ''}`}
             onClick={() => setTab('lists')}
-          >Lists</button>
+          >리스트</button>
           <button
             className={`lp-tab ${tab === 'archived' ? 'lp-tab--active' : ''}`}
             onClick={() => setTab('archived')}
-          >Archived</button>
+          >보관됨</button>
         </div>
         <button
           className="lp-add-btn"
@@ -80,7 +80,7 @@ export default function ListsPanel({ onClose, onSelect }: Props) {
         <Search size={13} className="lp-search-icon" />
         <input
           className="lp-search-input"
-          placeholder="Search..."
+          placeholder="검색..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -88,8 +88,8 @@ export default function ListsPanel({ onClose, onSelect }: Props) {
 
       {/* Table header */}
       <div className="lp-table-head">
-        <span className="lp-table-head__name">Name</span>
-        <span className="lp-table-head__count">Selected creator(s)</span>
+        <span className="lp-table-head__name">이름</span>
+        <span className="lp-table-head__count">선택된 크리에이터</span>
       </div>
 
       {/* List rows */}
