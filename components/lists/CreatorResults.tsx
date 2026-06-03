@@ -18,7 +18,7 @@ const CREATORS: Creator[] = [
   {
     id: '1',
     name: 'maria clara ★│.ˈ║',
-    country: 'Brazil', flag: '🇧🇷',
+    country: '브라질', flag: '🇧🇷',
     bio: '⭐ galera @capricho 2026 fiel às minhas raízes, dedicada às minhas flores ██████',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/20715869.png?ts=1773188746',
     posts: [
@@ -35,7 +35,7 @@ const CREATORS: Creator[] = [
   {
     id: '2',
     name: 'John Lightyear AM',
-    country: 'Mexico', flag: '🇲🇽',
+    country: '멕시코', flag: '🇲🇽',
     bio: 'Ser NERD Siempre fue Cool 🤓 +100k YouTube 🎮 + 90k Tiktok 📱 Contacto:...',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/14077123.png?ts=1776276405',
     posts: [
@@ -48,12 +48,12 @@ const CREATORS: Creator[] = [
       { platform: 'yt', followers: '106K', engagement: '3.05%' },
       { platform: 'tk', followers: '94K', engagement: '24.1%' },
     ],
-    categories: [{ color: '#f59e0b', label: 'Gaming' }, { color: '#a78bfa', label: 'Gaming Hardware' }],
+    categories: [{ color: '#f59e0b', label: '게이밍' }, { color: '#a78bfa', label: '게이밍 하드웨어' }],
   },
   {
     id: '3',
     name: 'Jordan Chua',
-    country: 'Singapore', flag: '🇸🇬',
+    country: '싱가포르', flag: '🇸🇬',
     bio: 'Content Creator in Singapore! 🎬 Find me on Youtube: Legocraze [150k] Vlog channel: Jordan Chua [40k]...',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/15524490.png?ts=1778361204',
     posts: [
@@ -71,7 +71,7 @@ const CREATORS: Creator[] = [
   {
     id: '4',
     name: 'awkward connoisseur',
-    country: 'United States', flag: '🇺🇸',
+    country: '미국', flag: '🇺🇸',
     bio: 'Chicago. weenie in media. writer. @bigkidshowchicago cofounder. R-A-Y-C-H Jackso...',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/11195590.png?ts=1772273814',
     posts: [
@@ -88,7 +88,7 @@ const CREATORS: Creator[] = [
   {
     id: '5',
     name: 'Chris Ortiz Jr',
-    country: 'United States', flag: '🇺🇸',
+    country: '미국', flag: '🇺🇸',
     bio: '📧 : teamchico@stregagroup.com Coachella vibes made with Hypic ✨',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/20254226.png?ts=1776876415',
     posts: [
@@ -100,12 +100,12 @@ const CREATORS: Creator[] = [
       { platform: 'ig', followers: '20K', engagement: '132.47%' },
       { platform: 'tk', followers: '257K', engagement: '0.91%' },
     ],
-    categories: [{ color: '#f59e0b', label: 'Sports' }, { color: '#a78bfa', label: 'Bodybuilding' }],
+    categories: [{ color: '#f59e0b', label: '스포츠' }, { color: '#a78bfa', label: '보디빌딩' }],
   },
   {
     id: '6',
     name: 'Official Cool Kid Family',
-    country: 'United States', flag: '🇺🇸',
+    country: '미국', flag: '🇺🇸',
     bio: '•YouTube: 600K+ •Indiana 📍 •Family 👨‍👩‍👧‍👦 • @djcoolkid44 @anginae23',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/8685115.png?ts=1773871287',
     posts: [
@@ -118,7 +118,7 @@ const CREATORS: Creator[] = [
       { platform: 'tk', followers: '105K', engagement: '11.14%' },
       { platform: 'yt', followers: '14K', engagement: '1.16%' },
     ],
-    categories: [{ color: '#f59e0b', label: "Children's Entertainment" }],
+    categories: [{ color: '#f59e0b', label: '어린이 엔터테인먼트' }],
   },
 ]
 
@@ -126,7 +126,6 @@ const PLATFORM_COLORS: Record<string, string> = {
   ig: '#e1306c', yt: '#ff0000', tk: '#000000',
 }
 
-// 플랫폼 아이콘 (SVG 인라인)
 function PlatformIcon({ p }: { p: 'ig' | 'tk' | 'yt' }) {
   if (p === 'ig') return (
     <svg width="10" height="10" viewBox="0 0 24 24" fill="#e1306c"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="#e1306c" strokeWidth="2.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="#e1306c" strokeWidth="2.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#e1306c"/></svg>
@@ -141,9 +140,9 @@ function PlatformIcon({ p }: { p: 'ig' | 'tk' | 'yt' }) {
 
 const ACTIVE_FILTERS = [
   { label: 'Instagram', color: '#e1306c' },
-  { label: 'Last activity: 3 months ago', color: '#e1306c' },
-  { label: 'Followers: 10K - 100K', color: '#e1306c' },
-  { label: 'Min. engagement growth: 10%', color: '#e1306c' },
+  { label: '최근 활동: 3개월 이내', color: '#e1306c' },
+  { label: '팔로워: 1만 - 10만', color: '#e1306c' },
+  { label: '최소 참여 성장률: 10%', color: '#e1306c' },
 ]
 
 const PAYWALL_AVATARS = [
@@ -153,7 +152,6 @@ const PAYWALL_AVATARS = [
   'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/11195590.png?ts=1772273814',
 ]
 
-// 스크롤 3번 이후 락 걸리는 인덱스
 const LOCK_AFTER = 3
 
 export default function CreatorResults() {
@@ -194,16 +192,16 @@ export default function CreatorResults() {
             <button className="results-filter-tag__remove"><X size={10} /></button>
           </div>
         ))}
-        <button className="results-clear-btn">Clear all filters</button>
+        <button className="results-clear-btn">필터 초기화</button>
       </div>
 
       {/* All / Smart tabs */}
       <div className="results-tabs">
         <button className={`results-tab ${smartTab === 'all' ? 'results-tab--active' : ''}`} onClick={() => setSmartTab('all')}>
-          All results
+          전체 결과
         </button>
         <button className={`results-tab ${smartTab === 'smart' ? 'results-tab--active' : ''}`} onClick={() => setSmartTab('smart')}>
-          Smart results
+          스마트 결과
           <span className="results-tab__beta">Beta</span>
         </button>
       </div>
@@ -282,7 +280,7 @@ export default function CreatorResults() {
               {/* Categories */}
               <div className="creator-card__categories">
                 {creator.categories.length === 0 ? (
-                  <span className="creator-card__no-cat">No category available <span style={{ color: '#9ca3af' }}>ⓘ</span></span>
+                  <span className="creator-card__no-cat">카테고리 없음 <span style={{ color: '#9ca3af' }}>ⓘ</span></span>
                 ) : (
                   creator.categories.map((cat) => (
                     <div key={cat.label} className="creator-card__cat-tag">
@@ -297,18 +295,17 @@ export default function CreatorResults() {
               <div className="creator-card__contact">
                 <button className="w-btn w-btn--primary" style={{ gap: '6px', padding: '7px 16px' }}>
                   <Mail size={13} />
-                  Contact
+                  연락하기
                 </button>
               </div>
             </div>
           )
         })}
 
-        {/* 스크롤 여백 */}
         <div style={{ height: locked ? '160px' : '32px' }} />
       </div>
 
-      {/* Paywall 배너 */}
+      {/* Paywall */}
       {locked && (
         <div className="paywall-banner">
           <div className="paywall-banner__inner">
@@ -322,20 +319,20 @@ export default function CreatorResults() {
               </div>
               <div className="paywall-banner__text">
                 <p className="paywall-banner__title">
-                  Unlock <span className="paywall-banner__count">9,990 more perfect creators</span> waiting for you to contact them 🤩
+                  딱 맞는 크리에이터 <span className="paywall-banner__count">9,990명이 더</span> 기다리고 있어요 🤩
                 </p>
-                <p className="paywall-banner__sub">Want to know who? Upgrade to Pro for the full list!</p>
+                <p className="paywall-banner__sub">누구인지 알고 싶으신가요? Pro로 업그레이드하여 전체 목록을 확인하세요!</p>
               </div>
             </div>
             <button className="paywall-banner__cta">
               <Sparkles size={13} />
-              7-day trial for $1
+              $1로 7일 체험하기
             </button>
           </div>
           <div className="paywall-banner__referral">
-            🎁 Psssst, you can have{' '}
-            <span className="paywall-banner__referral-link">+25 results per search</span>
-            {' '}as soon as your friend subscribes!
+            🎁 Psssst, 친구가 구독하면{' '}
+            <span className="paywall-banner__referral-link">검색당 +25개의 결과</span>
+            {' '}를 추가로 받을 수 있어요!
           </div>
         </div>
       )}
