@@ -22,11 +22,11 @@ const INFLUENCERS: Influencer[] = [
     name: 'Untamed Pixie',
     status: 'Lead',
     owner: 'connor kim',
-    list: 'My first list',
+    list: '내 첫 번째 리스트',
     tags: [],
-    country: 'Korea, Republic Of',
+    country: '대한민국',
     countryFlag: '🇰🇷',
-    lastContact: 'No communication yet',
+    lastContact: '연락 기록 없음',
   },
   {
     id: '2',
@@ -34,11 +34,11 @@ const INFLUENCERS: Influencer[] = [
     name: 'Stevany Supardi | Hany 하니',
     status: 'Lead',
     owner: 'connor kim',
-    list: 'My first list',
+    list: '내 첫 번째 리스트',
     tags: [],
-    country: 'Indonesia',
+    country: '인도네시아',
     countryFlag: '🇮🇩',
-    lastContact: 'No communication yet',
+    lastContact: '연락 기록 없음',
   },
   {
     id: '3',
@@ -48,9 +48,9 @@ const INFLUENCERS: Influencer[] = [
     owner: 'connor kim',
     list: null,
     tags: ['맛집'],
-    country: 'Korea, Republic Of',
+    country: '대한민국',
     countryFlag: '🇰🇷',
-    lastContact: 'No communication yet',
+    lastContact: '연락 기록 없음',
   },
 ]
 
@@ -58,6 +58,12 @@ const STATUS_COLORS: Record<string, string> = {
   Lead: '#f97316',
   Prospect: '#3b82f6',
   Partner: '#22c55e',
+}
+
+const STATUS_LABELS: Record<string, string> = {
+  Lead: '리드',
+  Prospect: '잠재 고객',
+  Partner: '파트너',
 }
 
 export default function CommunityTable() {
@@ -86,19 +92,19 @@ export default function CommunityTable() {
             <Search size={13} className="irm-search__icon" />
             <input
               className="irm-search__input"
-              placeholder="Search by Profile name"
+              placeholder="프로필 이름으로 검색"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
           <button className="w-btn w-btn--primary" style={{ gap: '6px' }}>
             <Mail size={13} />
-            Contact all
+            전체 연락하기
           </button>
         </div>
         <button className="w-btn w-btn--default irm-manage-btn">
           <Settings2 size={13} />
-          <span style={{ marginLeft: '6px' }}>Manage Fields</span>
+          <span style={{ marginLeft: '6px' }}>필드 관리</span>
         </button>
       </div>
 
@@ -115,7 +121,7 @@ export default function CommunityTable() {
                   onChange={toggleAll}
                 />
               </th>
-              {['Profile Name','Status','Owners','List','Influencer Tags','Country','Last Contact Date'].map((col) => (
+              {['프로필 이름', '상태', '담당자', '리스트', '인플루언서 태그', '국가', '마지막 연락일'].map((col) => (
                 <th key={col} className="irm-table__th">{col}</th>
               ))}
             </tr>
@@ -146,7 +152,7 @@ export default function CommunityTable() {
                   <div className="irm-status-cell">
                     <div className="irm-status" style={{ '--status-color': STATUS_COLORS[inf.status] } as React.CSSProperties}>
                       <span className="irm-status__dot" />
-                      <span className="irm-status__label">{inf.status}</span>
+                      <span className="irm-status__label">{STATUS_LABELS[inf.status] ?? inf.status}</span>
                     </div>
                     <ChevronDown size={12} className="irm-chevron" />
                   </div>
@@ -169,7 +175,7 @@ export default function CommunityTable() {
                 <td className="irm-table__td">
                   <div className="irm-tags-cell">
                     {inf.tags.length === 0 ? (
-                      <span className="irm-add-tags">Add tags</span>
+                      <span className="irm-add-tags">태그 추가</span>
                     ) : (
                       inf.tags.map((t) => (
                         <span key={t} className="irm-tag">{t}</span>
@@ -198,22 +204,22 @@ export default function CommunityTable() {
           <div className="irm-summary__scroll-thumb" />
         </div>
         <div className="irm-summary__stats">
-          <span className="irm-summary__label">Summary</span>
+          <span className="irm-summary__label">요약</span>
           <span className="irm-summary__info">ⓘ</span>
           <div className="irm-summary__community">
             <span>👥</span>
-            <span>Community</span>
+            <span>커뮤니티</span>
             <strong>3 / 100</strong>
           </div>
           {[
-            { label: 'INFLUENCERS', val: 3 },
+            { label: '인플루언서', val: 3 },
             { label: 'INSTAGRAM', val: 3 },
             { label: 'YOUTUBE', val: 3 },
             { label: 'TWITCH', val: 0 },
             { label: 'TIKTOK', val: 2 },
             { label: 'X', val: 0 },
             { label: 'PINTEREST', val: 1 },
-            { label: 'BLOG', val: 0 },
+            { label: '블로그', val: 0 },
           ].map((s) => (
             <div key={s.label} className="irm-summary__stat">
               <span className="irm-summary__stat-label">{s.label}</span>
