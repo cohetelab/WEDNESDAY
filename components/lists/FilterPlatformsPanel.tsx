@@ -64,7 +64,7 @@ const PLATFORMS: PlatformConfig[] = [
     ),
   },
   {
-    id: 'blog', label: 'Blog', bg: '#6b7280',
+    id: 'blog', label: '블로그', bg: '#6b7280',
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
         <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
@@ -74,11 +74,11 @@ const PLATFORMS: PlatformConfig[] = [
 ]
 
 const ACTIVITY_OPTIONS: { key: Activity; label: string }[] = [
-  { key: 'anytime', label: 'Anytime' },
-  { key: 'week', label: 'Week' },
-  { key: 'month', label: 'Month' },
-  { key: '3months', label: '3 months' },
-  { key: 'year', label: 'Year' },
+  { key: 'anytime', label: '전체' },
+  { key: 'week', label: '1주' },
+  { key: 'month', label: '1개월' },
+  { key: '3months', label: '3개월' },
+  { key: 'year', label: '1년' },
 ]
 
 interface Props {
@@ -111,7 +111,7 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
       {/* Search across */}
       <div className="fp-section">
         <div className="fp-heading">
-          <span>Search across</span>
+          <span>검색 플랫폼</span>
           <span className="fp-heading__icon">📍</span>
         </div>
         <div className="fp-platform-icons">
@@ -143,14 +143,14 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
         {/* Followers range */}
         <div className="fp-filter-grid">
           <div className="fp-filter-block">
-            <label className="fp-label">Followers</label>
+            <label className="fp-label">팔로워</label>
             <div className="fp-range-inputs">
               <input
                 className="fp-number-input"
                 value={followers.min}
                 onChange={(e) => setFollowers((f) => ({ ...f, min: e.target.value }))}
               />
-              <span className="fp-range-to">to</span>
+              <span className="fp-range-to">~</span>
               <input
                 className="fp-number-input"
                 value={followers.max}
@@ -161,7 +161,7 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
 
           <div className="fp-filter-block">
             <div className="fp-label-row">
-              <label className="fp-label">Min. followers growth rate</label>
+              <label className="fp-label">최소 팔로워 성장률</label>
               <span className="fp-ai-icon">✨</span>
             </div>
             <div className="fp-slider-row">
@@ -182,7 +182,7 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
         <div className="fp-filter-grid">
           <div className="fp-filter-block">
             <div className="fp-label-row">
-              <label className="fp-label">Min. avg engagement</label>
+              <label className="fp-label">최소 평균 참여율</label>
               <span className="fp-ai-icon">✨</span>
               <span className="fp-tag-icon">%</span>
               <span className="fp-tag-icon">#</span>
@@ -203,7 +203,7 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
 
           <div className="fp-filter-block">
             <div className="fp-label-row">
-              <label className="fp-label">Min. engagement growth</label>
+              <label className="fp-label">최소 참여율 성장</label>
               <span className="fp-ai-icon">✨</span>
             </div>
             <div className="fp-slider-row">
@@ -224,7 +224,7 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
         {/* Last activity */}
         <div className="fp-filter-block">
           <div className="fp-label-row">
-            <label className="fp-label">Last activity</label>
+            <label className="fp-label">최근 활동</label>
             <span className="fp-ai-icon">✨</span>
           </div>
           <div className="fp-activity-btns">
@@ -248,12 +248,12 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
         <div className="fp-upsell__left">
           <Sparkles size={14} className="fp-upsell__icon" />
           <div>
-            <p className="fp-upsell__title">Elevate your influencer matches 🤩</p>
-            <p className="fp-upsell__sub">Expand your search abilities with Search and Contact</p>
+            <p className="fp-upsell__title">인플루언서 매칭을 강화하세요 🤩</p>
+            <p className="fp-upsell__sub">Search and Contact로 검색 기능을 확장하세요</p>
           </div>
         </div>
         <button className="fp-upsell__btn">
-          <Sparkles size={11} /> 7-day trial for $1
+          <Sparkles size={11} /> $1로 7일 체험하기
         </button>
       </div>
 
@@ -269,7 +269,7 @@ export default function FilterPlatformsPanel({ onClose }: Props) {
             setActivity('anytime')
           }}
         >
-          Clear all filters
+          필터 초기화
         </button>
       </div>
     </div>
