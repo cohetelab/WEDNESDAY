@@ -12,9 +12,9 @@ export default function Sidebar() {
   const pathname = usePathname()
 
   const navItems = [
-    { href: '/lists', icon: Search, label: 'Search' },
-    { href: '/inbox', icon: Mail, label: 'Inbox' },
-    { href: '/community', icon: List, label: 'Community' },
+    { href: '/lists', icon: Search, label: '검색' },
+    { href: '/inbox', icon: Mail, label: '받은편지함' },
+    { href: '/community', icon: List, label: '커뮤니티' },
   ]
 
   return (
@@ -58,29 +58,27 @@ export default function Sidebar() {
           <div className="w-sidebar-item__icon">
             {collapsed ? <PanelLeftOpen size={15} /> : <PanelLeftClose size={15} />}
           </div>
-          {!collapsed && <span className="w-sidebar-item__label">Collapse</span>}
+          {!collapsed && <span className="w-sidebar-item__label">접기</span>}
         </button>
       </div>
 
       {/* Footer */}
       <div className="w-sidebar__footer">
-        {/* Trial */}
         {!collapsed && (
           <div className="w-sidebar__trial">
             <span className="w-sidebar__trial-text">
-              <strong>7 days</strong> for $1
+              <strong>7일</strong> $1에
             </span>
             <Link href="/settings/plans" className="w-tag w-tag--primary" style={{ textDecoration: 'none' }}>
-              Try Pro
+              Pro 체험
             </Link>
           </div>
         )}
 
-        {/* Community usage */}
         <Link href="/settings/billing" className="w-sidebar-item" style={{ textDecoration: 'none', flexDirection: collapsed ? 'row' : 'column', alignItems: collapsed ? 'center' : 'flex-start', height: 'auto', padding: '6px 8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%' }}>
             <div className="w-sidebar-item__icon"><Users size={15} /></div>
-            {!collapsed && <span className="w-sidebar-item__label">Community</span>}
+            {!collapsed && <span className="w-sidebar-item__label">커뮤니티</span>}
           </div>
           {!collapsed && (
             <div className="w-sidebar__community-stats">
@@ -92,19 +90,16 @@ export default function Sidebar() {
           )}
         </Link>
 
-        {/* Notification */}
         <button className="w-sidebar-item">
           <div className="w-sidebar-item__icon"><Bell size={15} /></div>
-          {!collapsed && <span className="w-sidebar-item__label">Notification</span>}
+          {!collapsed && <span className="w-sidebar-item__label">알림</span>}
         </button>
 
-        {/* Help */}
         <button className="w-sidebar-item">
           <div className="w-sidebar-item__icon"><HelpCircle size={15} /></div>
-          {!collapsed && <span className="w-sidebar-item__label">Help</span>}
+          {!collapsed && <span className="w-sidebar-item__label">도움말</span>}
         </button>
 
-        {/* My Account */}
         <button className="w-sidebar-item w-sidebar__account">
           <div className="w-avatar w-avatar--sm">
             <img
@@ -114,7 +109,7 @@ export default function Sidebar() {
             />
           </div>
           {!collapsed && (
-            <span className="w-sidebar-item__label" style={{ marginLeft: '6px' }}>My account</span>
+            <span className="w-sidebar-item__label" style={{ marginLeft: '6px' }}>내 계정</span>
           )}
         </button>
       </div>
