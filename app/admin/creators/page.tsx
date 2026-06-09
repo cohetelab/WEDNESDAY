@@ -1,29 +1,8 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Search, Plus, MoreHorizontal, Edit2, Trash2, X } from 'lucide-react'
-
-interface Creator {
-  id: number
-  name: string
-  handle: string
-  platform: string
-  category: string
-  followers: string
-  engagement: string
-  country: string
-  status: string
-}
-
-const INITIAL_CREATORS: Creator[] = [
-  { id: 1, name: 'Maria Clara',         handle: '@mariaclara',    platform: 'Instagram', category: '라이프스타일', followers: '2.4M', engagement: '4.2%', country: '🇧🇷 브라질',     status: '활성' },
-  { id: 2, name: 'John Lightyear',      handle: '@johnlightyear', platform: 'TikTok',    category: '패션',        followers: '1.8M', engagement: '6.1%', country: '🇺🇸 미국',       status: '활성' },
-  { id: 3, name: 'Jordan Chua',         handle: '@jordanchua',    platform: 'YouTube',   category: '뷰티',        followers: '890K', engagement: '3.8%', country: '🇸🇬 싱가포르',   status: '활성' },
-  { id: 4, name: 'Awkward Connoisseur', handle: '@awkwardc',      platform: 'Instagram', category: '유머',        followers: '450K', engagement: '8.3%', country: '🇺🇸 미국',       status: '활성' },
-  { id: 5, name: 'Chris Ortiz Jr',      handle: '@chrisortizjr',  platform: 'TikTok',    category: '피트니스',    followers: '1.2M', engagement: '5.5%', country: '🇺🇸 미국',       status: '활성' },
-  { id: 6, name: 'Cool Kid Family',     handle: '@coolkidfam',    platform: 'YouTube',   category: '패밀리',      followers: '3.1M', engagement: '2.9%', country: '🇰🇷 한국',       status: '활성' },
-  { id: 7, name: 'Stevany Supardi',     handle: '@hany_hani',     platform: 'Instagram', category: '뷰티',        followers: '780K', engagement: '7.1%', country: '🇮🇩 인도네시아', status: '활성' },
-  { id: 8, name: 'Untamed Pixie',       handle: '@untamedpixie',  platform: 'Instagram', category: '패션',        followers: '230K', engagement: '9.4%', country: '🇦🇺 호주',       status: '검토중' },
-]
+import { supabase } from '@/lib/supabase'
+import type { Creator } from '@/lib/supabase'
 
 const PLATFORM_COLOR: Record<string, string> = {
   Instagram: 'adm-badge--pink',
@@ -40,17 +19,27 @@ const PLATFORMS = ['Instagram', 'TikTok', 'YouTube', 'X', 'Twitch', 'Pinterest',
 const CATEGORIES = ['라이프스타일', '패션', '뷰티', '유머', '피트니스', '패밀리', '게이밍', '음식', '여행', '교육', '테크', '기타']
 const COUNTRIES = ['🇰🇷 한국', '🇺🇸 미국', '🇯🇵 일본', '🇧🇷 브라질', '🇸🇬 싱가포르', '🇮🇩 인도네시아', '🇦🇺 호주', '🇬🇧 영국', '🇫🇷 프랑스', '🇩🇪 독일', '기타']
 const STATUSES = ['활성', '검토중', '비활성']
-
 const EMPTY_FORM = { name: '', handle: '', platform: 'Instagram', category: '라이프스타일', followers: '', engagement: '', country: '🇰🇷 한국', status: '활성' }
 
 export default function AdminCreatorsPage() {
-  const [creators, setCreators] = useState<Creator[]>(INITIAL_CREATORS)
+  const [creators, setCreators] = useState<Creator[]>([])
+  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
-  const [openMenu, setOpenMenu] = useState<number | null>(null)
+  const [openMenu, setOpenMenu] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [editTarget, setEditTarget] = useState<Creator | null>(null)
   const [form, setForm] = useState(EMPTY_FORM)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [saving, setSaving] = useState(false)
+
+  useEffect(() => { loadCreators() }, [])
+
+  async function loadCreators() {
+    setLoading(true)
+    const { data } = await supabase.from('creators').select('*').order('created_at', { ascending: true })
+    if (data) setCreators(data)
+    setLoading(false)
+  }
 
   const filtered = creators.filter(
     (c) =>
@@ -89,20 +78,24 @@ export default function AdminCreatorsPage() {
     return e
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const e = validate()
     if (Object.keys(e).length > 0) { setErrors(e); return }
 
+    setSaving(true)
     if (editTarget) {
-      setCreators((prev) => prev.map((c) => c.id === editTarget.id ? { ...c, ...form } : c))
+      const { data } = await supabase.from('creators').update(form).eq('id', editTarget.id).select().single()
+      if (data) setCreators((prev) => prev.map((c) => c.id === editTarget.id ? data : c))
     } else {
-      const newId = Math.max(...creators.map((c) => c.id)) + 1
-      setCreators((prev) => [...prev, { id: newId, ...form }])
+      const { data } = await supabase.from('creators').insert(form).select().single()
+      if (data) setCreators((prev) => [...prev, data])
     }
+    setSaving(false)
     closeModal()
   }
 
-  function handleDelete(id: number) {
+  async function handleDelete(id: string) {
+    await supabase.from('creators').delete().eq('id', id)
     setCreators((prev) => prev.filter((c) => c.id !== id))
     setOpenMenu(null)
   }
@@ -139,15 +132,17 @@ export default function AdminCreatorsPage() {
         <table className="adm-table">
           <thead>
             <tr>
-              {['#', '크리에이터', '플랫폼', '카테고리', '팔로워', '인게이지먼트', '국가', '상태', ''].map((h) => (
+              {['크리에이터', '플랫폼', '카테고리', '팔로워', '인게이지먼트', '국가', '상태', ''].map((h) => (
                 <th key={h}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {filtered.map((c) => (
+            {loading && (
+              <tr><td colSpan={8} style={{ textAlign: 'center', padding: '32px', color: '#9ca3af' }}>불러오는 중...</td></tr>
+            )}
+            {!loading && filtered.map((c) => (
               <tr key={c.id}>
-                <td className="adm-table__muted">{c.id}</td>
                 <td>
                   <div className="adm-table__creator">
                     <div className="adm-table__avatar">{c.name[0]}</div>
@@ -162,7 +157,7 @@ export default function AdminCreatorsPage() {
                 <td className="adm-table__mono">{c.followers}</td>
                 <td className="adm-table__mono adm-table__eng">{c.engagement}</td>
                 <td className="adm-table__muted">{c.country}</td>
-                <td><span className={`adm-badge ${STATUS_COLOR[c.status]}`}>{c.status}</span></td>
+                <td><span className={`adm-badge ${STATUS_COLOR[c.status] ?? 'adm-badge--gray'}`}>{c.status}</span></td>
                 <td className="adm-table__action">
                   <div className="adm-menu-wrap">
                     <button
@@ -181,16 +176,15 @@ export default function AdminCreatorsPage() {
                 </td>
               </tr>
             ))}
-            {filtered.length === 0 && (
+            {!loading && filtered.length === 0 && (
               <tr>
-                <td colSpan={9} style={{ textAlign: 'center', padding: '32px', color: '#9ca3af' }}>검색 결과가 없습니다</td>
+                <td colSpan={8} style={{ textAlign: 'center', padding: '32px', color: '#9ca3af' }}>검색 결과가 없습니다</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
 
-      {/* Modal */}
       {showModal && (
         <div className="adm-modal-overlay" onClick={closeModal}>
           <div className="adm-modal" onClick={(e) => e.stopPropagation()}>
@@ -201,21 +195,18 @@ export default function AdminCreatorsPage() {
 
             <div className="adm-modal__body">
               <div className="adm-form-grid">
-                {/* 이름 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">이름 <span className="adm-form-required">*</span></label>
                   <input className={`adm-form-input ${errors.name ? 'adm-form-input--error' : ''}`} placeholder="예: Maria Clara" value={form.name} onChange={(e) => field('name', e.target.value)} />
                   {errors.name && <span className="adm-form-error">{errors.name}</span>}
                 </div>
 
-                {/* 핸들 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">핸들 <span className="adm-form-required">*</span></label>
                   <input className={`adm-form-input ${errors.handle ? 'adm-form-input--error' : ''}`} placeholder="예: @mariaclara" value={form.handle} onChange={(e) => field('handle', e.target.value)} />
                   {errors.handle && <span className="adm-form-error">{errors.handle}</span>}
                 </div>
 
-                {/* 플랫폼 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">플랫폼</label>
                   <select className="adm-form-select" value={form.platform} onChange={(e) => field('platform', e.target.value)}>
@@ -223,7 +214,6 @@ export default function AdminCreatorsPage() {
                   </select>
                 </div>
 
-                {/* 카테고리 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">카테고리</label>
                   <select className="adm-form-select" value={form.category} onChange={(e) => field('category', e.target.value)}>
@@ -231,21 +221,18 @@ export default function AdminCreatorsPage() {
                   </select>
                 </div>
 
-                {/* 팔로워 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">팔로워 수 <span className="adm-form-required">*</span></label>
                   <input className={`adm-form-input ${errors.followers ? 'adm-form-input--error' : ''}`} placeholder="예: 1.2M, 890K" value={form.followers} onChange={(e) => field('followers', e.target.value)} />
                   {errors.followers && <span className="adm-form-error">{errors.followers}</span>}
                 </div>
 
-                {/* 인게이지먼트 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">인게이지먼트 <span className="adm-form-required">*</span></label>
                   <input className={`adm-form-input ${errors.engagement ? 'adm-form-input--error' : ''}`} placeholder="예: 4.2%" value={form.engagement} onChange={(e) => field('engagement', e.target.value)} />
                   {errors.engagement && <span className="adm-form-error">{errors.engagement}</span>}
                 </div>
 
-                {/* 국가 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">국가</label>
                   <select className="adm-form-select" value={form.country} onChange={(e) => field('country', e.target.value)}>
@@ -253,7 +240,6 @@ export default function AdminCreatorsPage() {
                   </select>
                 </div>
 
-                {/* 상태 */}
                 <div className="adm-form-field">
                   <label className="adm-form-label">상태</label>
                   <select className="adm-form-select" value={form.status} onChange={(e) => field('status', e.target.value)}>
@@ -265,8 +251,8 @@ export default function AdminCreatorsPage() {
 
             <div className="adm-modal__footer">
               <button className="adm-btn-ghost" onClick={closeModal}>취소</button>
-              <button className="adm-btn-primary" onClick={handleSubmit}>
-                {editTarget ? '저장' : '추가'}
+              <button className="adm-btn-primary" onClick={handleSubmit} disabled={saving}>
+                {saving ? '저장 중...' : editTarget ? '저장' : '추가'}
               </button>
             </div>
           </div>
