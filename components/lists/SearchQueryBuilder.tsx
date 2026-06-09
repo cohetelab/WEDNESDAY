@@ -53,7 +53,6 @@ export default function SearchQueryBuilder({ onSearch }: Props) {
     }
   }
 
-  // 외부 클릭 시 드롭다운 닫기
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
@@ -87,10 +86,9 @@ export default function SearchQueryBuilder({ onSearch }: Props) {
 
                 {keywords.length === 0 && input === '' && !focused && (
                   <span className="w-query-topic__placeholder">
-                    Search for any{' '}
-                    <span className="w-color-yellow">keywords</span>,{' '}
-                    <span className="w-color-cyan">#hashtags</span> or{' '}
-                    <span className="w-color-violet">@username</span> to find creators
+                    <span className="w-color-yellow">키워드</span>,{' '}
+                    <span className="w-color-cyan">#해시태그</span> 또는{' '}
+                    <span className="w-color-violet">@사용자명</span>으로 크리에이터를 찾아보세요
                   </span>
                 )}
 
@@ -116,7 +114,7 @@ export default function SearchQueryBuilder({ onSearch }: Props) {
                     onKeyDown={handleKeyDown}
                     onFocus={() => setFocused(true)}
                     className="w-keyword-input__field"
-                    placeholder={keywords.length > 0 ? 'Add keyword' : ''}
+                    placeholder={keywords.length > 0 ? '키워드 추가' : ''}
                   />
                   {input && <CornerDownLeft size={12} className="w-keyword-input__enter-icon" />}
                 </div>
@@ -126,7 +124,7 @@ export default function SearchQueryBuilder({ onSearch }: Props) {
               <button
                 className="w-square-btn"
                 onClick={(e) => e.stopPropagation()}
-                title="Saved searches"
+                title="저장된 검색"
               >
                 <Bookmark size={13} />
               </button>
@@ -136,10 +134,9 @@ export default function SearchQueryBuilder({ onSearch }: Props) {
             {showDropdown && (
               <div className="w-search-dropdown">
                 <p className="w-search-dropdown__hint">
-                  Search for any{' '}
-                  <span className="w-color-yellow">keywords</span>,{' '}
-                  <span className="w-color-cyan">#hashtags</span> or{' '}
-                  <span className="w-color-violet">@username</span> to find creators
+                  <span className="w-color-yellow">키워드</span>,{' '}
+                  <span className="w-color-cyan">#해시태그</span> 또는{' '}
+                  <span className="w-color-violet">@사용자명</span>으로 크리에이터를 찾아보세요
                 </p>
               </div>
             )}
@@ -165,7 +162,7 @@ export default function SearchQueryBuilder({ onSearch }: Props) {
                 </>
               ) : (
                 <>
-                  <span className="w-query-topic__placeholder">Filter platforms</span>
+                  <span className="w-query-topic__placeholder">플랫폼 필터</span>
                   <ChevronDown size={14} className="w-query-topic__chevron" />
                 </>
               )}
@@ -183,7 +180,7 @@ export default function SearchQueryBuilder({ onSearch }: Props) {
               role="button"
               onClick={() => setMoreFiltersOpen((v) => !v)}
             >
-              <span className="w-query-topic__placeholder">More filters</span>
+              <span className="w-query-topic__placeholder">추가 필터</span>
               <SlidersHorizontal size={14} className="w-query-topic__placeholder" />
               <ChevronDown size={14} className="w-query-topic__chevron" />
             </div>

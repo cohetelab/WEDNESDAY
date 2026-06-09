@@ -4,7 +4,7 @@ import { Sparkles, Compass, Plus, ArrowRight } from 'lucide-react'
 const TRENDING_SEARCHES = [
   {
     key: 'instagram_rising_stars',
-    title: "Instagram's rising stars under 100k followers",
+    title: '팔로워 10만 미만의 인스타그램 라이징 스타',
     count: '+10K',
     avatars: [
       'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/20715869.png?ts=1773188746',
@@ -15,7 +15,7 @@ const TRENDING_SEARCHES = [
   },
   {
     key: 'tiktok_top_engaging',
-    title: 'Top engaging TikTok creators under 100K followers',
+    title: '팔로워 10만 미만의 TikTok 인기 크리에이터',
     count: '+10K',
     avatars: [
       'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/18771531.png?ts=1777408385',
@@ -26,7 +26,7 @@ const TRENDING_SEARCHES = [
   },
   {
     key: 'instagram_top_engaging',
-    title: 'Top engaging Instagram creators under 100K followers',
+    title: '팔로워 10만 미만의 Instagram 인기 크리에이터',
     count: '+10K',
     avatars: [
       'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/15524490.png?ts=1778361204',
@@ -43,10 +43,10 @@ export default function EmptyState() {
       {/* Brand premade searches */}
       <section className="w-section">
         <div className="w-section__header">
-          <span className="w-section__title">Searches tailored to your brand</span>
+          <span className="w-section__title">브랜드 맞춤 검색</span>
           <div className="w-tag w-tag--ai">
             <Sparkles size={11} />
-            <span>Jaice curated</span>
+            <span>Jaice 큐레이션</span>
           </div>
         </div>
 
@@ -61,17 +61,16 @@ export default function EmptyState() {
           <div className="w-onboarding-card__content">
             <div className="w-onboarding-card__text">
               <h3 className="w-onboarding-card__title">
-                Set up your brand to discover the ideal creators
+                이상적인 크리에이터를 찾으려면 브랜드를 설정하세요
               </h3>
               <p className="w-onboarding-card__subtitle">
-                Add your brand identity information so we can generate a list of creators that
-                perfectly fit your brand&apos;s style and audience.
+                브랜드 정보를 입력하면 브랜드 스타일과 타겟에 맞는 크리에이터 목록을 생성해 드립니다.
               </p>
             </div>
             <div className="w-onboarding-card__actions">
               <button className="w-btn w-btn--primary">
                 <Plus size={14} />
-                <span style={{ marginLeft: '6px' }}>Create brand</span>
+                <span style={{ marginLeft: '6px' }}>브랜드 만들기</span>
               </button>
             </div>
           </div>
@@ -80,7 +79,7 @@ export default function EmptyState() {
 
       {/* Trending searches */}
       <section className="w-section">
-        <h2 className="w-section__title">Explore trending searches</h2>
+        <h2 className="w-section__title">트렌딩 검색 탐색</h2>
         <div className="w-trending-grid">
           {TRENDING_SEARCHES.map((search) => (
             <div key={search.key} className="w-trending-card" role="button">
@@ -88,7 +87,7 @@ export default function EmptyState() {
                 <div className="w-trending-card__top">
                   <div className="w-tag w-tag--discover">
                     <Compass size={11} />
-                    <span>Discover</span>
+                    <span>탐색</span>
                   </div>
                 </div>
                 <p className="w-trending-card__title">{search.title}</p>
@@ -109,7 +108,7 @@ export default function EmptyState() {
                 </div>
                 <button className="w-btn w-btn--default" style={{ padding: '5px 12px' }}>
                   <ArrowRight size={13} />
-                  <span style={{ marginLeft: '6px' }}>Explore</span>
+                  <span style={{ marginLeft: '6px' }}>탐색하기</span>
                 </button>
               </div>
             </div>
@@ -119,7 +118,7 @@ export default function EmptyState() {
 
       {/* Import from external sources */}
       <section className="w-section">
-        <h2 className="w-section__title">Import creators from external sources</h2>
+        <h2 className="w-section__title">외부 소스에서 크리에이터 가져오기</h2>
         <div className="w-import-sources">
           <div className="w-import-banner">
             <div className="w-import-banner__icon">
@@ -129,12 +128,12 @@ export default function EmptyState() {
               />
             </div>
             <div className="w-import-banner__content">
-              <span className="w-import-banner__title">Chrome plugin</span>
+              <span className="w-import-banner__title">크롬 플러그인</span>
               <span className="w-import-banner__subtitle">
-                Add creators from social media profile pages
+                소셜 미디어 프로필에서 크리에이터 추가
               </span>
             </div>
-            <button className="w-btn w-btn--default">Download</button>
+            <button className="w-btn w-btn--default">다운로드</button>
           </div>
           <div className="w-import-spacer" />
         </div>

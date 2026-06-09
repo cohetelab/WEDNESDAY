@@ -18,7 +18,7 @@ const INITIAL_SELECTED: InfluencerCard[] = [
   {
     id: '1',
     name: 'Stevany Supardi | Hany 하니',
-    country: 'Indonesia',
+    country: '인도네시아',
     flag: '🇮🇩',
     bio: 'Living in KR Foodie | Traveler 🌍 Skincare & Beauty Enthusiast 🧴 WA +6287889070770 / Kakao :...',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/18771531.png?ts=1777408385',
@@ -37,7 +37,7 @@ const INITIAL_SELECTED: InfluencerCard[] = [
   {
     id: '2',
     name: 'Untamed Pixie',
-    country: 'Korea, Republic Of',
+    country: '대한민국',
     flag: '🇰🇷',
     bio: 'Indian in Korea 🇮🇳🇰🇷 Researcher by profession 🔬 YouTube channel link 🔗',
     avatar: 'https://reachr-assets.s3.us-west-2.amazonaws.com/influencer-server/influencer/15524490.png?ts=1778361204',
@@ -60,7 +60,7 @@ const PLATFORM_COLORS: Record<string, string> = {
   tk: '#000000',
 }
 
-const LISTS = ['My first list', 'Summer Campaign', 'Beauty KOLs']
+const LISTS = ['내 첫 번째 리스트', '여름 캠페인', '뷰티 KOL']
 
 function CardMenu({ infId, onRemove }: { infId: string; onRemove: (id: string) => void }) {
   const [open, setOpen] = useState(false)
@@ -103,13 +103,12 @@ function CardMenu({ infId, onRemove }: { infId: string; onRemove: (id: string) =
 
       {open && (
         <div className="sc-dropdown">
-          {/* Add to lists */}
           <button
             className="sc-dropdown__item"
             onClick={() => setShowLists((v) => !v)}
           >
             <Search size={13} className="sc-dropdown__icon" />
-            <span>Add to lists</span>
+            <span>리스트에 추가</span>
           </button>
 
           {showLists && (
@@ -118,7 +117,7 @@ function CardMenu({ infId, onRemove }: { infId: string; onRemove: (id: string) =
                 <Search size={12} className="sc-lists-search-icon" />
                 <input
                   className="sc-lists-search"
-                  placeholder="Search lists..."
+                  placeholder="리스트 검색..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   autoFocus
@@ -144,7 +143,7 @@ function CardMenu({ infId, onRemove }: { infId: string; onRemove: (id: string) =
 
           <button className="sc-dropdown__item">
             <Users size={13} className="sc-dropdown__icon" />
-            <span>Remove from community</span>
+            <span>커뮤니티에서 제거</span>
           </button>
 
           <button
@@ -152,7 +151,7 @@ function CardMenu({ infId, onRemove }: { infId: string; onRemove: (id: string) =
             onClick={() => { onRemove(infId); setOpen(false) }}
           >
             <ListX size={13} className="sc-dropdown__icon" />
-            <span>Remove from this list</span>
+            <span>이 리스트에서 제거</span>
           </button>
         </div>
       )}
@@ -194,10 +193,10 @@ export default function SelectedInfluencers() {
             <div className="selected-card__name-row">
               <span className="selected-card__name">{inf.name}</span>
               <div className="sc-action-btns">
-                <button className="sc-icon-btn" title="Add to community">
+                <button className="sc-icon-btn" title="커뮤니티에 추가">
                   <UserPlus size={13} />
                 </button>
-                <button className="sc-icon-btn" title="Expand">
+                <button className="sc-icon-btn" title="펼치기">
                   <ChevronDown size={13} />
                 </button>
                 <CardMenu infId={inf.id} onRemove={removeInfluencer} />
@@ -237,7 +236,7 @@ export default function SelectedInfluencers() {
           {/* Category col */}
           <div className="selected-card__categories">
             {inf.categories.length === 0 ? (
-              <span className="selected-card__no-category">No category available <span style={{ color: '#9ca3af' }}>ⓘ</span></span>
+              <span className="selected-card__no-category">카테고리 없음 <span style={{ color: '#9ca3af' }}>ⓘ</span></span>
             ) : (
               inf.categories.map((cat) => (
                 <span key={cat} className="selected-card__category-tag">
@@ -251,7 +250,7 @@ export default function SelectedInfluencers() {
           <div className="selected-card__actions">
             <button className="w-btn w-btn--primary" style={{ gap: '6px', padding: '7px 16px' }}>
               <Mail size={13} />
-              Contact
+              연락하기
             </button>
           </div>
         </div>

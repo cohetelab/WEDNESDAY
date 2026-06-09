@@ -12,7 +12,7 @@ interface TopbarProps {
 
 export default function Topbar({ activeTab, onTabChange }: TopbarProps) {
   const [listOpen, setListOpen] = useState(false)
-  const [listName, setListName] = useState('My first list')
+  const [listName, setListName] = useState('내 첫 번째 리스트')
   const listWrapRef = useRef<HTMLDivElement>(null)
 
   const tabs: {
@@ -23,10 +23,10 @@ export default function Topbar({ activeTab, onTabChange }: TopbarProps) {
     locked?: boolean
     gradient?: boolean
   }[] = [
-    { key: 'find',       Icon: Search,    label: 'Find creators' },
-    { key: 'selected',   Icon: UserCheck, label: 'Selected',  badge: 2 },
-    { key: 'rejected',   Icon: UserX,     label: 'Rejected',  badge: 0 },
-    { key: 'lookalikes', Icon: Sparkles,  label: 'Lookalikes', locked: true, gradient: true },
+    { key: 'find',       Icon: Search,    label: '크리에이터 찾기' },
+    { key: 'selected',   Icon: UserCheck, label: '선택됨',  badge: 2 },
+    { key: 'rejected',   Icon: UserX,     label: '제외됨',  badge: 0 },
+    { key: 'lookalikes', Icon: Sparkles,  label: '유사 크리에이터', locked: true, gradient: true },
   ]
 
   return (
@@ -83,7 +83,7 @@ export default function Topbar({ activeTab, onTabChange }: TopbarProps) {
         <div className="w-topbar__actions">
           <button className="w-btn w-btn--default">
             <BookOpen size={14} />
-            <span style={{ marginLeft: '6px' }}>Learn</span>
+            <span style={{ marginLeft: '6px' }}>학습</span>
           </button>
         </div>
       </div>

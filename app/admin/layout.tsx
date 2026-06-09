@@ -1,6 +1,7 @@
 'use client'
 import { ReactNode } from 'react'
 import AdminSidebar from '@/components/admin/AdminSidebar'
+import './modal.css'
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
